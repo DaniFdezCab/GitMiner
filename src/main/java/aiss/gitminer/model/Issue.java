@@ -12,13 +12,14 @@ import java.util.List;
 
 @Entity
 @Table(name = "Issue")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Issue {
 
     @Id
     @JsonProperty("id")
     private String id;
 
-    @JsonProperty("ref_id")
+    @JsonProperty("iid")
     private String refId;
     @JsonProperty("title")
     private String title;
