@@ -92,7 +92,7 @@ public class CommitController {
             description = "Get a Commit object by specifying its id",
             tags = { "get" })
     @GetMapping("/commits/{id}")
-    public Commit findOne( @Parameter(description = "id of Commit to be searched ") @PathVariable Long id) throws CommitNotFoundException{
+    public Commit findOne( @Parameter(description = "id of Commit to be searched ") @PathVariable String id) throws CommitNotFoundException{
         Optional<Commit> commit = repository.findById(id);
         if(!commit.isPresent()){
             throw new CommitNotFoundException();
@@ -112,7 +112,7 @@ public class CommitController {
             tags = { "put" })
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/commits/{id}")
-    public void update(@Valid @RequestBody Commit updatedCommit, @Parameter(description = "id of the Commit to be updated") @PathVariable Long id)throws CommitNotFoundException{
+    public void update(@Valid @RequestBody Commit updatedCommit, @Parameter(description = "id of the Commit to be updated") @PathVariable String id)throws CommitNotFoundException{
         Optional<Commit> commitData = repository.findById(id);
 
         if(!commitData.isPresent()){
@@ -149,7 +149,7 @@ public class CommitController {
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/commits/{id}")
-    public void delete( @Parameter(description = "id of the Commit to be deleted") @PathVariable Long id)throws CommitNotFoundException {
+    public void delete( @Parameter(description = "id of the Commit to be deleted") @PathVariable String id)throws CommitNotFoundException {
         if (repository.existsById(id)) {
             repository.deleteById(id);
         }
