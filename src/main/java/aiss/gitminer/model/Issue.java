@@ -16,10 +16,10 @@ import java.util.List;
 public class Issue {
 
     @Id
-    @JsonProperty("id")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @JsonProperty("iid")
+    @JsonProperty("ref_id")
     private String refId;
     @JsonProperty("title")
     private String title;
@@ -52,19 +52,33 @@ public class Issue {
     @JsonProperty("downvotes")
     private Integer downvotes;
 
-    @JsonProperty("web_url")
-    private String webUrl;
-
     @JsonProperty("comments")
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "issueId")
     private List<Comment> comments;
 
-    public String getId() {
+    public Issue(String refId, String title, String description, String state, String createdAt, String updatedAt,
+                 String closedAt, List<String> labels, User author, User assignee, Integer upvotes, Integer downvotes, List<Comment> comments) {
+        this.refId = refId;
+        this.title = title;
+        this.description = description;
+        this.state = state;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.closedAt = closedAt;
+        this.labels = labels;
+        this.author = author;
+        this.assignee = assignee;
+        this.upvotes = upvotes;
+        this.downvotes = downvotes;
+        this.comments = comments;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -163,15 +177,6 @@ public class Issue {
     public void setDownvotes(Integer downvotes) {
         this.downvotes = downvotes;
     }
-
-    public String getWebUrl() {
-        return webUrl;
-    }
-
-    public void setWebUrl(String webUrl) {
-        this.webUrl = webUrl;
-    }
-
     public List<Comment> getComments() {
         return comments;
     }

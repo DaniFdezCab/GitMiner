@@ -5,9 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.annotation.Generated;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -16,8 +14,8 @@ import javax.validation.constraints.NotNull;
 public class User {
 
     @Id
-    @JsonProperty("id")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @JsonProperty("username")
     @NotEmpty(message = "The username cannot be empty")
     private String username;
@@ -28,11 +26,18 @@ public class User {
     @JsonProperty("web_url")
     private String webUrl;
 
-    public String getId() {
+    public User(String username, String name, String avatarUrl, String webUrl) {
+        this.username = username;
+        this.name = name;
+        this.avatarUrl = avatarUrl;
+        this.webUrl = webUrl;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
