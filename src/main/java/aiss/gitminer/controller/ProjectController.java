@@ -105,7 +105,7 @@ public class ProjectController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public Project createProject(@Valid @RequestBody  Project project){
-        Project project1 = repository.save(new Project(project.getName(),project.getWebUrl(),project.getCommits(), project.getIssues()));
+        Project project1 = repository.save(new Project(project.getId(),project.getName(),project.getWebUrl(),project.getCommits(), project.getIssues()));
         return project1;
     }
 

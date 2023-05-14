@@ -14,8 +14,8 @@ import java.util.List;
 public class Project {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @JsonProperty("id")
+    public String id;
 
     @JsonProperty("name")
     @NotEmpty(message = "The name of the project cannot be empty")
@@ -25,33 +25,34 @@ public class Project {
     @NotEmpty(message = "The URL of the project cannot be empty")
     public String webUrl;
     @JsonProperty("commits")
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "projectId")
     private List<Commit> commits;
 
     @JsonProperty("issues")
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "projectId")
     private List<Issue> issues;
 
     public Project() {
+
         commits = new ArrayList<>();
         issues = new ArrayList<>();
     }
 
-    public Project(String name, String webUrl, List<Commit> commits, List<Issue> issues) {
+    public Project(String id,String name, String webUrl, List<Commit> commits, List<Issue> issues) {
+        this.id = id;
         this.name = name;
         this.webUrl = webUrl;
         this.commits = commits;
-        this.issues = issues;
-
+        this.issues =  issues;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -94,6 +95,7 @@ public class Project {
         sb.append("id");
         sb.append('=');
         sb.append(((this.id == null)?"<null>":this.id));
+        sb.append(',');
         sb.append("commits");
         sb.append('=');
         sb.append(((this.commits == null)?"<null>":this.commits));

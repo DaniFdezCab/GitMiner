@@ -14,9 +14,8 @@ import javax.validation.constraints.NotNull;
 public class Comment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    @JsonProperty("id")
+    private String id;
     @JsonProperty("body")
     @NotEmpty(message = "The message cannot be empty.")
     @Column(columnDefinition="TEXT")
@@ -33,18 +32,11 @@ public class Comment {
     @JsonProperty("updated_at")
     private String updatedAt;
 
-    public Comment(String body, User author, String createdAt, String updatedAt) {
-        this.body = body;
-        this.author = author;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-    }
-
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

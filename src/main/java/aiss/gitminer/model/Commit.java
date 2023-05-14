@@ -2,7 +2,10 @@ package aiss.gitminer.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -10,8 +13,9 @@ import javax.validation.constraints.NotNull;
 @Table(name = "Commit")
 public class Commit {
 
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty("id")
     private String id;
     @JsonProperty("title")
     private String title;
@@ -42,24 +46,12 @@ public class Commit {
             "")
     private String webUrl;
 
-    public Commit(String title, String message, String authorName, String authorEmail, String authoredDate,
-                  String committerName, String committerEmail, String committedDate, String webUrl) {
-        this.title = title;
-        this.message = message;
-        this.authorName = authorName;
-        this.authorEmail = authorEmail;
-        this.authoredDate = authoredDate;
-        this.committerName = committerName;
-        this.committerEmail = committerEmail;
-        this.committedDate = committedDate;
-        this.webUrl = webUrl;
+    public String getId() {
+        return id;
     }
 
     public void setId(String id) {
         this.id = id;
-    }
-    public String getId(){
-        return id;
     }
 
     public String getTitle() {

@@ -2,13 +2,8 @@ package aiss.gitminer.controller;
 
 
 import aiss.gitminer.exceptions.CommitNotFoundException;
-import aiss.gitminer.exceptions.ProjectNotFoundException;
 import aiss.gitminer.model.Commit;
-import aiss.gitminer.model.Issue;
-import aiss.gitminer.model.Project;
-import aiss.gitminer.repository.CommentRepository;
 import aiss.gitminer.repository.CommitRepository;
-import aiss.gitminer.repository.ProjectRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -21,12 +16,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,10 +29,6 @@ import java.util.Optional;
 public class CommitController {
     @Autowired
     CommitRepository repository;
-
-    @Autowired
-    ProjectRepository projectRepository;
-
 
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "List of commits",

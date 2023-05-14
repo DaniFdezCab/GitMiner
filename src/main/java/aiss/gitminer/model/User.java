@@ -5,7 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.annotation.Generated;
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -13,9 +15,10 @@ import javax.validation.constraints.NotNull;
 @Table(name = "GMUser")     // Watch out: User is a reserved keyword in H2
 public class User {
 
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @JsonProperty("id")
+    private String id;
     @JsonProperty("username")
     @NotEmpty(message = "The username cannot be empty")
     private String username;
@@ -26,18 +29,22 @@ public class User {
     @JsonProperty("web_url")
     private String webUrl;
 
-    public User(String username, String name, String avatarUrl, String webUrl) {
+    public User() {
+    }
+
+    public User(String id, String username, String name, String avatarUrl, String webUrl) {
+        this.id = id;
         this.username = username;
         this.name = name;
         this.avatarUrl = avatarUrl;
         this.webUrl = webUrl;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
